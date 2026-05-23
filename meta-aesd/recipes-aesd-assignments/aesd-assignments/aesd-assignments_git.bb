@@ -8,7 +8,7 @@ SRC_URI = "git://git@github.com/cu-ecen-aeld/assignments-3-and-later-mickeyminth
 
 PV = "1.0+git${SRCPV}"
 # TODO: set to reference a specific commit hash in your assignment repo
-SRCREV = "5dbcd6b96ff2975568c96f0dbb7433079859b920"
+SRCREV = "ab031672cb220acf2bbe4f335df7652d2c9617a4"
 
 # This sets your staging directory based on WORKDIR, where WORKDIR is defined at 
 # https://docs.yoctoproject.org/ref-manual/variables.html?highlight=workdir#term-WORKDIR
@@ -21,6 +21,7 @@ inherit pkgconfig
 # TODO: Add the aesdsocket application and any other files you need to install
 # See https://git.yoctoproject.org/poky/plain/meta/conf/bitbake.conf?h=kirkstone
 #FILES:${PN} += "${bindir}/aesdsocket"
+FILES:${PN} += "${bindir}/aesdsocket"
 
 # TODO: customize these as necessary for any libraries you need for your application
 # (and remove comment)
@@ -29,6 +30,11 @@ TARGET_LDFLAGS += "-pthread -lrt"
 do_configure () {
 	:
 }
+
+inherit update-rc.d
+
+INITSCRIPT_NAME = "aesdsocket"
+INITSCRIPT_PARAMS = "defaults"
 
 do_compile () {
 	# Compile ONLY the server directory
@@ -50,8 +56,8 @@ do_install () {
 
 	# Install your start script (SysV init)
 	install -d ${D}${sysconfdir}/init.d
-	install -m 0755 ${S}/server/aesdsocket-start-stop.sh \
-	${D}${sysconfdir}/init.d/aesdsocket
+	install -m 0755 ${S}/server/startup_script.sh\
+		${D}${sysconfdir}/init.d/aesdsocket
 }
 
-FILES:${PN} += "${bindir}/aesdsocket"
+
