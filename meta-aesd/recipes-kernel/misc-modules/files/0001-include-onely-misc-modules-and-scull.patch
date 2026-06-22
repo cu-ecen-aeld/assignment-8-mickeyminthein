@@ -1,0 +1,23 @@
+From bb0058b0a5a0df274f641b5ad8e07fc23d3b44e6 Mon Sep 17 00:00:00 2001
+From: Mickey Thein <mickeyminthein@gmail.com>
+Date: Mon, 22 Jun 2026 00:15:07 -0400
+Subject: [PATCH] include onely misc-modules and scull
+
+---
+ Makefile | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 7b08c49..c4f2e2e 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,8 +1,5 @@
+ 
+-SUBDIRS =  misc-progs misc-modules \
+-           skull scull scullc scullp lddbus sculld scullv shortprint simple tty \
+-	   pci usb\
+-	   sbull snull short
++SUBDIRS =  misc-modules scull
+ 
+ all: subdirs
+ 
